@@ -45,9 +45,9 @@ class Child extends React.Component {
           <button onClick={() => {
             const storeValueInterested = parseInt(Math.random()*100);
             this.setState({ storeValueInterested });
-            this.props.myAction({num: storeValueInterested, secReducer: false});
+            this.props.myAction({num: storeValueInterested, variation: 1});
           }}>update redux store value {this.props.myProp ? "1" : "2"}</button>
-          <button onClick={() => this.props.myAction({num: this.state.storeValueInterested, secReducer: false})}>
+          <button onClick={() => this.props.myAction({num: this.state.storeValueInterested, variation: 1})}>
             resend same value
           </button>
           {this.state.storeValueInterested}
@@ -57,9 +57,9 @@ class Child extends React.Component {
           <button onClick={() => {
             const storeValueInterested = parseInt(Math.random()*100);
             this.setState({ storeValueInterested });
-            this.props.myAction({num: storeValueInterested, secReducer: true});
+            this.props.myAction({num: storeValueInterested, variation: 2});
           }}>update redux store value {this.props.myProp ? "1" : "2"}</button>
-          <button onClick={() => this.props.myAction({num: this.state.storeValueInterested, secReducer: true})}>
+          <button onClick={() => this.props.myAction({num: this.state.storeValueInterested, variation: 2})}>
             resend same value
           </button>
           {this.state.storeValueInterested}

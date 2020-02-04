@@ -33,13 +33,13 @@ class App extends Component {
       <div>
         <div>
           <button onClick={() => {
-            store.dispatch(myAction({num: parseInt(Math.random()*100), secReducer: false}));
+            store.dispatch(myAction({num: parseInt(Math.random()*100), variation: 1}));
           }}>update redux store value 1</button>
         </div>
 
         <div>
           <button onClick={() => {
-            store.dispatch(myAction({num: parseInt(Math.random()*100), secReducer: true}));
+            store.dispatch(myAction({num: parseInt(Math.random()*100), variation: 2}));
           }}>update redux store value 2</button>
         </div>
 
