@@ -11,12 +11,10 @@ import myAction from './myAction';
 import myReducer from './myReducer';
 import reducerCreator from './reducerCreator';
 
-import Context from './context';
-
-// reuse reducer
+// reuse reducer like this
 const rootReducer = combineReducers({
-  value1FromRedux: reducerCreator(myReducer, false),
-  value2FromRedux: reducerCreator(myReducer, true),
+  value1FromRedux: reducerCreator(myReducer, 1),
+  value2FromRedux: reducerCreator(myReducer, 2),
   value3FromRedux: irrelevantReducer,
 });
 const store = createStore(rootReducer);
@@ -57,10 +55,8 @@ class App extends Component {
         <div><button onClick={() => this.setState({child2: !this.state.child2})}>toggle child2</button></div>
 
         <div>
-          <Context.Provider value={{myProp: true}}>
-            <Child myProp={true} />
-          </Context.Provider>
-          {this.state.child2 && <Context.Provider myProp={false} value={{myProp: false}}><Child /></Context.Provider>}
+          <Child myProp={true} value={{myProp: true}} />
+          {this.state.child2 && <Child myProp={false} value={{myProp: false}}  />}
         </div>
       </div>
     );

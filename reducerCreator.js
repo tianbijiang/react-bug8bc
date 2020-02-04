@@ -1,27 +1,35 @@
-// purpose: to reuse value1Reducer.js
-export default function(reducerFunction, secReducer, reducerName) {
-  return (state, action) => {
-    reducerFunction.reducerName = reducerName;
-    if (state === undefined) {
-      return secReducer ? "default2" : "default1";
+// reuse myReducer.js
+export default function(reducerFunction, variation, reducerName) {
+  const Wrapper = (state, action) => {
+    if (state === undefined) return "default"; // defaultState can vary depending on each variation/your use case
+
+    // TODO: check if this block is needed
+    if (variation !== action.variation) {
+      return state;
     }
 
-    const source =
-      action.secReducer ||
-      (action.payload && action.payload.secReducer) ||
-      false;
-    if (secReducer && source) {
-      const inputState = state;
-      const newState = reducerFunction(inputState, action);
-      if (inputState !== newState) {
+    if (variation && action.variation) {
+      // reuse the original reducer
+      const newState = reducerFunction(state, action);
+
+      // do necessary modifications for each use case
+      switch (action.variation) {
+        case 1:
+          newState += " variation1";
+          break;
+        case 2:
+          newState += " variation2";
+          break;
+        default:
+          break;
+      }
+      if (state !== newState) {
         return newState;
       }
+      return state;
     }
-
-    if (!source && secReducer === false) {
-      return reducerFunction(state, action);
-    }
-
-    return state;
+    return reducerFunction(state, action);
   };
+  Wrapper.reducerName = reducerName;
+  return Wrapper;
 }
