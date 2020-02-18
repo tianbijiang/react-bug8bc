@@ -15,10 +15,10 @@ export default function(reducerFunction, variation, reducerName) {
       // do necessary modifications for each use case
       switch (action.payload.variation) {
         case 1:
-          newState = "Hello " + newState;
+          newState = newState;
           break;
         case 2:
-          newState = "Bye " + newState;
+          newState = newState;
           break;
         default:
           break;
